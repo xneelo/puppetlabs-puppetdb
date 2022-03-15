@@ -34,7 +34,7 @@ class puppetdb::master::puppetdb_conf (
 
     ini_setting { 'puppetdbserver_urls':
       setting => 'server_urls',
-      value   => $servers_url_string.join,
+      value   => $servers_url_string,
     }
   }
 
