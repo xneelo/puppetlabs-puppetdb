@@ -71,7 +71,7 @@ class puppetdb::master::config (
     # *must* not perform the other configuration steps, or else
 
     $conn_puppetdb_server = $manage_config ? {
-      true    => $puppetdb_servers.map | $server | { "https://${server}:${port}"}.join(','),
+      true    => $puppetdb_servers.map | $server | { "${server}:8081"}.join(','),
       default => undef,
     }
     $conn_puppetdb_port = $manage_config ? {
