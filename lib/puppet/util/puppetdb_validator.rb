@@ -25,7 +25,6 @@ class Puppet::Util::PuppetdbValidator
   end
 
   def valid_connection_new_client?
-    Puppet.notice "The value of puppetdb_server is #{puppetdb_server}"
     puppetdb_server.each { | server |
       test_uri = URI("#{use_ssl ? 'https' : 'http'}://#{server}:#{puppetdb_port}#{test_path}")
       begin
