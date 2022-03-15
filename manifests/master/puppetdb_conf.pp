@@ -30,10 +30,11 @@ class puppetdb::master::puppetdb_conf (
       value   => $port,
     }
   } else {
-    $servers_url_string = servers.each |server| { server.insert(0, 'https://') << ":#{port}"}.join(',')
+    $servers_url_string = servers.map { | item | item.insert(0, 'https://') << ":#{port}"}
+
     ini_setting { 'puppetdbserver_urls':
       setting => 'server_urls',
-      value   => $servers_url_string,
+      value   => $servers_url_string.join(','),
     }
   }
 
