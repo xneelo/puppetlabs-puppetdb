@@ -26,15 +26,17 @@ class Puppet::Util::PuppetdbValidator
 
   def valid_connection_new_client?
     Puppet.notice "The value of puppetdb_server is #{puppetdb_server}"
-    test_uri = URI("#{use_ssl ? 'https' : 'http'}://#{puppetdb_server}:#{puppetdb_port}#{test_path}")
-    begin
-      conn = Puppet.runtime[:http]
-      _response = conn.get(test_uri, headers: test_headers)
-      true
-    rescue Puppet::HTTP::ResponseError => e
-      log_error e.message, e.response.code
-      false
-    end
+    puppetdb_server.each { | server |
+      test_uri = URI("#{use_ssl ? 'https' : 'http'}://#{server}:#{puppetdb_port}#{test_path}")
+      begin
+        conn = Puppet.runtime[:http]
+        _response = conn.get(test_uri, headers: test_headers)
+        true
+      rescue Puppet::HTTP::ResponseError => e
+        log_error e.message, e.response.code
+        false
+      end
+    }
   end
 
   def valid_connection_old_client?
