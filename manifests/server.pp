@@ -406,7 +406,8 @@ class puppetdb::server (
     -> Class['puppetdb::server::global']
     -> Class['puppetdb::server::command_processing']
     -> Class['puppetdb::server::database']
-    -> Class['puppetdb::server::read_database']
+    # Read data_base is currently kind broken see https://github.com/puppetlabs/puppetlabs-puppetdb/pull/349/
+    # -> Class['puppetdb::server::read_database']
     -> Class['puppetdb::server::jetty']
     -> Class['puppetdb::server::puppetdb']
     -> Service[$puppetdb_service]
