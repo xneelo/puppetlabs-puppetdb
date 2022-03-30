@@ -24,6 +24,7 @@ class Puppet::Util::PuppetdbValidator
     end
   end
 
+
   def valid_connection_new_client?(server)
     test_uri = URI("#{use_ssl ? 'https' : 'http'}://#{server}:#{puppetdb_port}#{test_path}")
     begin
@@ -44,6 +45,7 @@ class Puppet::Util::PuppetdbValidator
       return false
     end
     true
+
   end
 
   # Utility method; attempts to make an http/https connection to the puppetdb server.
