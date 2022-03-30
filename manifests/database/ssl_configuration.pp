@@ -54,7 +54,7 @@ class puppetdb::database::ssl_configuration (
 
   $_puppetdb_servers = flatten($puppetdb_server)
 
-  flatten($_puppetdb_server).each | $server | {
+  $_puppetdb_servers.each | $server | {
     puppetdb::database::postgresql_ssl_rules { "Configure postgresql ssl rules for ${database_username} from ${server}":
       database_name     => $database_name,
       database_username => $database_username,
